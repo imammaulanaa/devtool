@@ -84,6 +84,14 @@ function App() {
               <Key className="w-4 h-4" />
               PGP
             </TabsTrigger>
+            <TabsTrigger value="jwt" className="gap-2">
+              <ShieldCheck className="w-4 h-4" />
+              JWT
+            </TabsTrigger>
+            <TabsTrigger value="regex" className="gap-2">
+              <Regex className="w-4 h-4" />
+              Regex
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="yaml">
