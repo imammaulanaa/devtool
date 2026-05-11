@@ -19,6 +19,7 @@ import DiffTool from '@/tools/DiffTool';
 import Base64Tool from '@/tools/Base64Tool';
 import UrlTool from '@/tools/UrlTool';
 import CronTool from '@/tools/CronTool';
+import TimestampTool from '@/tools/TimestampTool';
 import PgpTool from '@/tools/PgpTool';
 import ThemeToggle from '@/components/ui/ThemeToggle';
 
