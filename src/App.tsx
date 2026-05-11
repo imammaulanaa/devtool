@@ -21,6 +21,8 @@ import UrlTool from '@/tools/UrlTool';
 import CronTool from '@/tools/CronTool';
 import TimestampTool from '@/tools/TimestampTool';
 import PgpTool from '@/tools/PgpTool';
+import JwtTool from '@/tools/JwtTool';
+import RegexTool from '@/tools/RegexTool';
 import ThemeToggle from '@/components/ui/ThemeToggle';
 
 function App() {
@@ -232,6 +234,48 @@ function App() {
               </CardHeader>
               <CardContent>
                 <PgpTool />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="jwt">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5" />
+                  JWT Decoder
+                </CardTitle>
+                <CardDescription>
+                  Decode a JSON Web Token into its header, payload, and signature. Annotates
+                  standard claims (<code className="font-mono text-xs">iss</code>,{' '}
+                  <code className="font-mono text-xs">sub</code>,{' '}
+                  <code className="font-mono text-xs">exp</code>, etc.) and warns if the token
+                  is expired or uses <code className="font-mono text-xs">alg: none</code>. This
+                  tool decodes only — it does not verify signatures.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <JwtTool />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="regex">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Regex className="w-5 h-5" />
+                  Regex Tester
+                </CardTitle>
+                <CardDescription>
+                  Test JavaScript-flavor regular expressions against a string. Toggle flags,
+                  pick from common presets (email, URL, IPv4, …), and inspect each match with
+                  its index, capture groups, and named groups. Matches are highlighted in the
+                  preview.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <RegexTool />
               </CardContent>
             </Card>
           </TabsContent>
