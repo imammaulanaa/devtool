@@ -11,35 +11,44 @@ import {
   ShieldCheck,
   CalendarClock,
   Regex,
+  Lock,
+  Network,
+  Hash,
 } from 'lucide-react';
 
 import YamlValidator from '@/tools/YamlValidator';
 import JsonValidator from '@/tools/JsonValidator';
+import K8sSecretTool from '@/tools/K8sSecretTool';
 import DiffTool from '@/tools/DiffTool';
 import Base64Tool from '@/tools/Base64Tool';
 import UrlTool from '@/tools/UrlTool';
 import CronTool from '@/tools/CronTool';
 import TimestampTool from '@/tools/TimestampTool';
+import CidrTool from '@/tools/CidrTool';
 import PgpTool from '@/tools/PgpTool';
 import JwtTool from '@/tools/JwtTool';
 import RegexTool from '@/tools/RegexTool';
-import ThemeToggle from '@/components/ui/ThemeToggle';
+import StatusCodeTool from '@/tools/StatusCodeTool';
+import ThemeToggle from '@/components/ThemeToggle';
 
 function App() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-card">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-primary rounded-lg">
-                <FileCode className="w-6 h-6 text-primary-foreground" />
+        <div className="container mx-auto px-3 py-3 sm:px-4 sm:py-6">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+              <div className="p-1.5 sm:p-2 bg-primary rounded-lg shrink-0">
+                <FileCode className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
               </div>
-              <div>
-                <h1 className="text-2xl font-bold">DevTools Hub</h1>
-                <p className="text-sm text-muted-foreground">
-                  YAML • JSON • Diff • Base64 • URL • Cron • Time • PGP • JWT • Regex
+              <div className="min-w-0">
+                <h1 className="text-lg sm:text-2xl font-bold leading-tight">DevTools Hub</h1>
+                <p className="text-xs sm:text-sm text-muted-foreground hidden sm:block leading-snug">
+                  YAML • JSON • K8s • Diff • Base64 • URL • Cron • Time • CIDR • PGP • JWT • Regex • Codes
+                </p>
+                <p className="text-xs text-muted-foreground sm:hidden">
+                  13 developer utilities
                 </p>
               </div>
             </div>
@@ -49,9 +58,9 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-3 py-4 sm:px-4 sm:py-8">
         <Tabs defaultValue="yaml" className="w-full">
-          <TabsList className="grid w-full max-w-6xl grid-cols-5 lg:grid-cols-10 h-auto mb-8">
+          <TabsList className="flex w-full overflow-x-auto h-auto mb-4 sm:mb-8 [&>button]:shrink-0 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:bg-muted-foreground/30 [&::-webkit-scrollbar-thumb]:rounded-full lg:grid lg:grid-cols-10 lg:max-w-6xl">
             <TabsTrigger value="yaml" className="gap-2">
               <FileCode className="w-4 h-4" />
               YAML
@@ -59,6 +68,10 @@ function App() {
             <TabsTrigger value="json" className="gap-2">
               <FileJson className="w-4 h-4" />
               JSON
+            </TabsTrigger>
+            <TabsTrigger value="k8s" className="gap-2">
+              <Lock className="w-4 h-4" />
+              K8s
             </TabsTrigger>
             <TabsTrigger value="diff" className="gap-2">
               <GitCompare className="w-4 h-4" />
@@ -80,6 +93,10 @@ function App() {
               <CalendarClock className="w-4 h-4" />
               Time
             </TabsTrigger>
+            <TabsTrigger value="cidr" className="gap-2">
+              <Network className="w-4 h-4" />
+              CIDR
+            </TabsTrigger>
             <TabsTrigger value="pgp" className="gap-2">
               <Key className="w-4 h-4" />
               PGP
@@ -91,6 +108,10 @@ function App() {
             <TabsTrigger value="regex" className="gap-2">
               <Regex className="w-4 h-4" />
               Regex
+            </TabsTrigger>
+            <TabsTrigger value="codes" className="gap-2">
+              <Hash className="w-4 h-4" />
+              Codes
             </TabsTrigger>
           </TabsList>
 
@@ -126,6 +147,27 @@ function App() {
               </CardHeader>
               <CardContent>
                 <JsonValidator />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="k8s">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Lock className="w-5 h-5" />
+                  Kubernetes Secret / ConfigMap
+                </CardTitle>
+                <CardDescription>
+                  Decode <code className="font-mono text-xs">data:</code> Base64 values from a
+                  Secret or ConfigMap manifest in one go, or generate a manifest from{' '}
+                  <code className="font-mono text-xs">key=value</code> pairs. Supports{' '}
+                  <code className="font-mono text-xs">stringData</code>, multi-document YAML,
+                  and detects binary values automatically.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <K8sSecretTool />
               </CardContent>
             </Card>
           </TabsContent>
@@ -226,6 +268,26 @@ function App() {
             </Card>
           </TabsContent>
 
+          <TabsContent value="cidr">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Network className="w-5 h-5" />
+                  CIDR Calculator
+                </CardTitle>
+                <CardDescription>
+                  Calculate network details for IPv4 CIDR notation: network and broadcast
+                  addresses, masks, host counts, binary/hex representation, and detection of
+                  RFC 1918 private ranges, CGNAT, link-local, and loopback. Plus subnet split
+                  into smaller blocks.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CidrTool />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
           <TabsContent value="pgp">
             <Card>
               <CardHeader>
@@ -287,13 +349,32 @@ function App() {
               </CardContent>
             </Card>
           </TabsContent>
+
+          <TabsContent value="codes">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Hash className="w-5 h-5" />
+                  Status Code Reference
+                </CardTitle>
+                <CardDescription>
+                  Quick lookup for HTTP status codes (incl. nginx 444 / 499), gRPC codes (0–16),
+                  and Linux exit codes / signals (137 = OOM kill, 139 = segfault, etc.). Search
+                  across all categories or filter by type.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <StatusCodeTool />
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
       </main>
 
       {/* Footer */}
-      <footer className="border-t mt-16">
-        <div className="container mx-auto px-4 py-6">
-          <div className="text-center text-sm text-muted-foreground">
+      <footer className="border-t mt-8 sm:mt-16">
+        <div className="container mx-auto px-3 py-4 sm:px-4 sm:py-6">
+          <div className="text-center text-xs sm:text-sm text-muted-foreground">
             DevTools Hub - Free online developer utilities
           </div>
         </div>
