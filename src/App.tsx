@@ -29,7 +29,7 @@ import PgpTool from '@/tools/PgpTool';
 import JwtTool from '@/tools/JwtTool';
 import RegexTool from '@/tools/RegexTool';
 import StatusCodeTool from '@/tools/StatusCodeTool';
-import ThemeToggle from '@/components/ThemeToggle';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 
 function App() {
   return (
