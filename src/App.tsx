@@ -5,15 +5,12 @@ import {
   FileCode,
   GitCompare,
   Binary,
-  Link,
   Clock,
   Key,
   ShieldCheck,
-  CalendarClock,
   Regex,
   Lock,
   Network,
-  Hash,
 } from 'lucide-react';
 
 import YamlValidator from '@/tools/YamlValidator';
@@ -21,15 +18,12 @@ import JsonValidator from '@/tools/JsonValidator';
 import K8sSecretTool from '@/tools/K8sSecretTool';
 import DiffTool from '@/tools/DiffTool';
 import Base64Tool from '@/tools/Base64Tool';
-import UrlTool from '@/tools/UrlTool';
 import CronTool from '@/tools/CronTool';
-import TimestampTool from '@/tools/TimestampTool';
 import CidrTool from '@/tools/CidrTool';
 import PgpTool from '@/tools/PgpTool';
 import JwtTool from '@/tools/JwtTool';
 import RegexTool from '@/tools/RegexTool';
-import StatusCodeTool from '@/tools/StatusCodeTool';
-import ThemeToggle from '@/components/ui/ThemeToggle';
+import ThemeToggle from '@/components/ThemeToggle';
 
 function App() {
   return (
@@ -45,10 +39,10 @@ function App() {
               <div className="min-w-0">
                 <h1 className="text-lg sm:text-2xl font-bold leading-tight">DevTools Hub</h1>
                 <p className="text-xs sm:text-sm text-muted-foreground hidden sm:block leading-snug">
-                  YAML • JSON • K8s • Diff • Base64 • URL • Cron • Time • CIDR • PGP • JWT • Regex • Codes
+                  YAML • JSON • K8s • Diff • Base64 • Cron • CIDR • PGP • JWT • Regex
                 </p>
                 <p className="text-xs text-muted-foreground sm:hidden">
-                  13 developer utilities
+                  10 developer utilities
                 </p>
               </div>
             </div>
@@ -60,7 +54,7 @@ function App() {
       {/* Main Content */}
       <main className="container mx-auto px-3 py-4 sm:px-4 sm:py-8">
         <Tabs defaultValue="yaml" className="w-full">
-          <TabsList className="flex w-full overflow-x-auto h-auto mb-4 sm:mb-8 [&>button]:shrink-0 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:bg-muted-foreground/30 [&::-webkit-scrollbar-thumb]:rounded-full lg:grid lg:grid-cols-10 lg:max-w-6xl">
+          <TabsList className="grid w-full max-w-6xl grid-cols-5 lg:grid-cols-10 h-auto mb-4 sm:mb-8">
             <TabsTrigger value="yaml" className="gap-2">
               <FileCode className="w-4 h-4" />
               YAML
@@ -81,17 +75,9 @@ function App() {
               <Binary className="w-4 h-4" />
               Base64
             </TabsTrigger>
-            <TabsTrigger value="url" className="gap-2">
-              <Link className="w-4 h-4" />
-              URL
-            </TabsTrigger>
             <TabsTrigger value="cron" className="gap-2">
               <Clock className="w-4 h-4" />
               Cron
-            </TabsTrigger>
-            <TabsTrigger value="timestamp" className="gap-2">
-              <CalendarClock className="w-4 h-4" />
-              Time
             </TabsTrigger>
             <TabsTrigger value="cidr" className="gap-2">
               <Network className="w-4 h-4" />
@@ -108,10 +94,6 @@ function App() {
             <TabsTrigger value="regex" className="gap-2">
               <Regex className="w-4 h-4" />
               Regex
-            </TabsTrigger>
-            <TabsTrigger value="codes" className="gap-2">
-              <Hash className="w-4 h-4" />
-              Codes
             </TabsTrigger>
           </TabsList>
 
@@ -208,25 +190,6 @@ function App() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="url">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Link className="w-5 h-5" />
-                  URL Encoder / Decoder
-                </CardTitle>
-                <CardDescription>
-                  Encode text for safe use in URLs, or decode percent-encoded URLs
-                  back to readable text. Supports component mode (default) and
-                  full URL mode.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <UrlTool />
-              </CardContent>
-            </Card>
-          </TabsContent>
-
           <TabsContent value="cron">
             <Card>
               <CardHeader>
@@ -245,25 +208,6 @@ function App() {
               </CardHeader>
               <CardContent>
                 <CronTool />
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="timestamp">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <CalendarClock className="w-5 h-5" />
-                  Timestamp Converter
-                </CardTitle>
-                <CardDescription>
-                  Convert between Unix epoch (seconds, milliseconds, micro-, nano-) and human
-                  date formats. Auto-detects the input format and shows ISO 8601, UTC, local
-                  time, and relative time side-by-side.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <TimestampTool />
               </CardContent>
             </Card>
           </TabsContent>
@@ -346,25 +290,6 @@ function App() {
               </CardHeader>
               <CardContent>
                 <RegexTool />
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="codes">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Hash className="w-5 h-5" />
-                  Status Code Reference
-                </CardTitle>
-                <CardDescription>
-                  Quick lookup for HTTP status codes (incl. nginx 444 / 499), gRPC codes (0–16),
-                  and Linux exit codes / signals (137 = OOM kill, 139 = segfault, etc.). Search
-                  across all categories or filter by type.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <StatusCodeTool />
               </CardContent>
             </Card>
           </TabsContent>
