@@ -23,7 +23,7 @@ import CidrTool from '@/tools/CidrTool';
 import PgpTool from '@/tools/PgpTool';
 import JwtTool from '@/tools/JwtTool';
 import RegexTool from '@/tools/RegexTool';
-import ThemeToggle from '@/components/ThemeToggle';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 
 function App() {
   return (
