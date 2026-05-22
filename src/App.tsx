@@ -11,11 +11,14 @@ import {
   Regex,
   Lock,
   Network,
+  Anchor,
+  Github,
 } from 'lucide-react';
 
 import YamlValidator from '@/tools/YamlValidator';
 import JsonValidator from '@/tools/JsonValidator';
 import K8sSecretTool from '@/tools/K8sSecretTool';
+import HelmValuesTool from '@/tools/HelmValuesTool';  
 import DiffTool from '@/tools/DiffTool';
 import Base64Tool from '@/tools/Base64Tool';
 import CronTool from '@/tools/CronTool';
@@ -39,10 +42,10 @@ function App() {
               <div className="min-w-0">
                 <h1 className="text-lg sm:text-2xl font-bold leading-tight">DevTools Hub</h1>
                 <p className="text-xs sm:text-sm text-muted-foreground hidden sm:block leading-snug">
-                  YAML • JSON • K8s • Diff • Base64 • Cron • CIDR • PGP • JWT • Regex
+                  YAML • JSON • K8s • Helm • Diff • Base64 • Cron • CIDR • PGP • JWT • Regex
                 </p>
                 <p className="text-xs text-muted-foreground sm:hidden">
-                  10 developer utilities
+                  11 developer utilities
                 </p>
               </div>
             </div>
@@ -54,7 +57,7 @@ function App() {
       {/* Main Content */}
       <main className="container mx-auto px-3 py-4 sm:px-4 sm:py-8">
         <Tabs defaultValue="yaml" className="w-full">
-          <TabsList className="grid w-full max-w-6xl grid-cols-5 lg:grid-cols-10 h-auto mb-4 sm:mb-8">
+          <TabsList className="grid w-full max-w-6xl grid-cols-4 sm:grid-cols-6 lg:grid-cols-[repeat(11,minmax(0,1fr))] h-auto mb-4 sm:mb-8">
             <TabsTrigger value="yaml" className="gap-2">
               <FileCode className="w-4 h-4" />
               YAML
@@ -66,6 +69,10 @@ function App() {
             <TabsTrigger value="k8s" className="gap-2">
               <Lock className="w-4 h-4" />
               K8s
+            </TabsTrigger>
+            <TabsTrigger value="helm" className="gap-2">
+            <Anchor className="w-4 h-4" />
+            Helm
             </TabsTrigger>
             <TabsTrigger value="diff" className="gap-2">
               <GitCompare className="w-4 h-4" />
@@ -154,6 +161,30 @@ function App() {
             </Card>
           </TabsContent>
 
+          <TabsContent value="helm">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Anchor className="w-5 h-5" />
+                  Helm Values Generator
+                </CardTitle>
+                <CardDescription>
+                  Paste a Helm chart template and automatically extract all{' '}
+                  <code className="font-mono text-xs">{'.Values.*'}</code> references
+                  into a starter <code className="font-mono text-xs">values.yaml</code>.
+                  Detects types from <code className="font-mono text-xs">| default</code>,{' '}
+                  <code className="font-mono text-xs">| int</code>,{' '}
+                  <code className="font-mono text-xs">| quote</code>,{' '}
+                  <code className="font-mono text-xs">range</code>, and{' '}
+                  <code className="font-mono text-xs">if .enabled</code> patterns.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <HelmValuesTool />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
           <TabsContent value="diff">
             <Card>
               <CardHeader>
@@ -237,13 +268,13 @@ function App() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Key className="w-5 h-5" />
-                  PGP Key Pair Generator
+                  PGP Toolkit
                 </CardTitle>
                 <CardDescription>
-                  Generate an OpenPGP key pair entirely in your browser. Keys are
-                  produced locally — nothing is sent to any server. Powered by{' '}
-                  <code className="font-mono text-xs">openpgp.js</code>{' '}
-                  (lazy-loaded on first generation to keep the app lightweight).
+                  Generate key pairs, encrypt and decrypt messages, and inspect any PGP
+                  key — all entirely in your browser. Nothing is sent to any server.
+                  Powered by <code className="font-mono text-xs">openpgp.js</code>{' '}
+                  (lazy-loaded on first use to keep the app lightweight).
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -299,8 +330,23 @@ function App() {
       {/* Footer */}
       <footer className="border-t mt-8 sm:mt-16">
         <div className="container mx-auto px-3 py-4 sm:px-4 sm:py-6">
-          <div className="text-center text-xs sm:text-sm text-muted-foreground">
-            DevTools Hub - Free online developer utilities
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
+            <span>DevTools Hub — Free online developer utilities</span>
+            <span className="hidden sm:inline text-muted-foreground/40">·</span>
+            
+            <a  href="https://github.com/imammaulanaa/devtool"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
+            >
+              <Github className="w-4 h-4" />
+              <span>imammaulanaa/devtool</span>
+              <span className="hidden sm:inline text-muted-foreground/40">·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <span className="text-green-600 dark:text-green-400">●</span>
+                100% client-side · no data sent to any server
+              </span>
+            </a>
           </div>
         </div>
       </footer>
