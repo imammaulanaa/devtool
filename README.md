@@ -3,8 +3,8 @@
 > Free, fast, **100% client-side** developer utilities. No server, no tracking, no telemetry — your sensitive data (PGP keys, JWT secrets, K8s manifests, env vars) never leaves your browser.
 ![alt text](public/image.png)
 <p align="center">
-  <a href="https://devtool-gamma.vercel.app/">
-    <strong>🌐 Live demo →&nbsp;&nbsp;devtool-gamma.vercel.app</strong>
+  <a href="https://devtoolhub.cloud/">
+    <strong>🌐 Live →&nbsp;&nbsp;devtoolhub.cloud</strong>
   </a>
 </p>
 

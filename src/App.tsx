@@ -13,6 +13,7 @@ import {
   Network,
   Anchor,
   Github,
+  Terminal,
 } from 'lucide-react';
 
 import YamlValidator from '@/tools/YamlValidator';
@@ -334,18 +335,18 @@ function App() {
             <span>DevTools Hub — Free online developer utilities</span>
             <span className="hidden sm:inline text-muted-foreground/40">·</span>
             
-            <a  href="https://github.com/imammaulanaa/devtool"
+            <a  href="https://imamspace.my.id/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
             >
-              <Github className="w-4 h-4" />
-              <span>imammaulanaa/devtool</span>
-              <span className="hidden sm:inline text-muted-foreground/40">·</span>
               <span className="inline-flex items-center gap-1.5">
                 <span className="text-green-600 dark:text-green-400">●</span>
                 100% client-side · no data sent to any server
               </span>
+              <Terminal className="w-4 h-4" />
+              <span>imammaulana</span>
+              <span className="hidden sm:inline text-muted-foreground/40">·</span>
             </a>
           </div>
         </div>
