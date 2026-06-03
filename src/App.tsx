@@ -12,7 +12,6 @@ import {
   Lock,
   Network,
   Anchor,
-  Github,
   Terminal,
 } from 'lucide-react';
 
